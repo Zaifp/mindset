@@ -50,6 +50,8 @@ function fwd_setup() {
 	register_nav_menus(
 		array(
 			'header' => esc_html__( 'Header Menu Location', 'fwd' ),
+			'footer-left' => esc_html__( 'Footer - Left Side', 'fwd' ),
+			'social-media-menu' => esc_html__( 'Social - Media - Menu', 'fwd' )
 		)
 	);
 
@@ -145,6 +147,14 @@ function fwd_widgets_init() {
 			'after_title'   => '</h2>',
 		)
 	);
+	register_sidebar( array(
+		'name'          => __( 'Secondary Sidebar', 'theme_name' ),
+		'id'            => 'sidebar-2',
+		'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</li></ul>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	) );
 }
 add_action( 'widgets_init', 'fwd_widgets_init' );
 
