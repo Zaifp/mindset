@@ -88,6 +88,12 @@ function fwd_setup() {
 	// Add theme support for selective refresh for widgets.
 	add_theme_support( 'customize-selective-refresh-widgets' );
 
+	// custom crop image size
+
+	add_image_size('portrait-blog', 200, 250, true);
+
+	add_image_size('hard', 400, 200, true);
+
 	/**
 	 * Add support for core custom logo.
 	 *
