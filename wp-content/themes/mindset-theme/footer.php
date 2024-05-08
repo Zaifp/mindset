@@ -23,6 +23,14 @@
 		 <nav id="footer-navigation" class="footer-navigation">
           <?php wp_nav_menu( array( 'theme_location' => 'social-media-menu') ); ?>
          </nav>
+		 <?php 
+            the_privacy_policy_link();
+         ?>
+
+        <?php if ( !is_page('contact') ) : ?>
+            <p><?php the_field('physical_address', 18); ?></p>
+            <p><?php the_field('email_address', 18); ?></p>
+        <?php endif; ?>
 
 
 		 

@@ -200,3 +200,34 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+
+function fwd_post_filter( $use_block_editor, $post ) {
+    // Add IDs to the array
+    $page_ids = array( 75 );
+    if ( in_array( $post->ID, $page_ids ) ) {
+        return false;
+    } else {
+        return $use_block_editor;
+    }
+}
+add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
+
+
+// //  add theme color meta tag
+// function fwd_theme_color (){
+// 	echo '<meta name= "theme-color" content="#fff200">';
+// }
+// add_action('wp_head, fwd_theme_color');
+
+// function fwd_excerpt_length($length){
+// 	return 20;
+// }
+// add_filter('excerpt_lenth','fwd_excerpt_length',999); 
+
+// function fwd_excerpt_more($more){
+// 	$more = '... <a href="'.esc_url(get_permalink()).'">'. __('Continue Reading') .'</a>';
+// 	return $more;
+// }
+
+// add_filter( 'excerpt_more','fwd_excerpt_more' );
