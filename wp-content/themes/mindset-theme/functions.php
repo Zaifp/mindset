@@ -214,6 +214,13 @@ function fwd_post_filter( $use_block_editor, $post ) {
 add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
 
 
+/**
+* Custom Post Types & Taxonomies
+*/
+require get_template_directory() . '/inc/cpt-taxonomy.php';
+
+
+
 // //  add theme color meta tag
 // function fwd_theme_color (){
 // 	echo '<meta name= "theme-color" content="#fff200">';

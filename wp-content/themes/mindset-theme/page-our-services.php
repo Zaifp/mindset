@@ -18,16 +18,43 @@ get_header();
 	<main id="primary" class="site-main">
 
 		<?php
-		while ( have_posts() ) :
-			the_post();
+		while ( have_posts() ) : the_post();
+		$args = array(
+			'post_type'      => 'service',
+			'posts_per_page' => 4,
+			'orderby'        => 'title',
+			'order'          => 'ASC',
+		);
+        ?>
+        <?php
+			$query = new WP_Query( $args );
+			if ( $query -> have_posts() ){
+				while ( $query -> have_posts() ) {
+					$query -> the_post();
+					echo '<h2>';
+					the_title();
+					echo '</h2>';
+					if ( function_exists( 'get_field' ) ) {
 
-			get_template_part( 'template-parts/content', 'page' );
+						if ( get_field( 'services', get_the_ID() ) ) {
+							echo '<p>';
+							echo get_field( 'services', get_the_ID() );
+							echo '</p>';
+						}
+					
+					
+					}
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+				}
 
+				wp_reset_postdata();
+				
+			} 
+
+
+			
+
+		
 		endwhile; // End of the loop.
 		?>
 
