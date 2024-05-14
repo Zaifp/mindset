@@ -126,8 +126,109 @@ add_action( 'init', 'fwd_register_custom_post_types' );
 
 
 
+
+function fwd_register_taxonomies() {
+    // Add Work Category taxonomy
+    $labels = array(
+        'name'              => _x( 'Work Categories', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Work Category', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Work Categories' ),
+        'all_items'         => __( 'All Work Category' ),
+        'parent_item'       => __( 'Parent Work Category' ),
+        'parent_item_colon' => __( 'Parent Work Category:' ),
+        'edit_item'         => __( 'Edit Work Category' ),
+        'view_item'         => __( 'Vview Work Category' ),
+        'update_item'       => __( 'Update Work Category' ),
+        'add_new_item'      => __( 'Add New Work Category' ),
+        'new_item_name'     => __( 'New Work Category Name' ),
+        'menu_name'         => __( 'Work Category' ),
+    );
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_in_menu'      => true,
+        'show_in_nav_menu'  => true,
+        'show_in_rest'      => true,
+        'show_admin_column' => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'work-categories' ),
+    );
+    register_taxonomy( 'fwd-work-category', array( 'fwd-work' ), $args );
+}
+
+$labels = array(
+    'name'              => _x( 'Featured', 'taxonomy general name' ),
+    'singular_name'     => _x( 'Featured', 'taxonomy singular name' ),
+    'search_items'      => __( 'Search Featured' ),
+    'all_items'         => __( 'All Featured' ),
+    'parent_item'       => __( 'Parent Featured' ),
+    'parent_item_colon' => __( 'Parent Featured:' ),
+    'edit_item'         => __( 'Edit Featured' ),
+    'update_item'       => __( 'Update Featured' ),
+    'add_new_item'      => __( 'Add New Featured' ),
+    'new_item_name'     => __( 'New Work Featured' ),
+    'menu_name'         => __( 'Featured' ),
+);
+
+$args = array(
+    'hierarchical'      => true,
+    'labels'            => $labels,
+    'show_ui'           => true,
+    'show_admin_column' => true,
+    'show_in_rest'      => true,
+    'query_var'         => true,
+    'rewrite'           => array( 'slug' => 'featured' ),
+);
+
+register_taxonomy( 'fwd-featured', array( 'fwd-work' ), $args );
+
+$labels = array(
+    'name'                       => _x( 'Service Types', 'Taxonomy General Name' ),
+    'singular_name'              => _x( 'Service Type', 'Taxonomy Singular Name' ),
+    'menu_name'                  => __( 'Service Type' ),
+    'all_items'                  => __( 'All Service Types' ),
+    'parent_item'                => __( 'Parent Service Type' ),
+    'parent_item_colon'          => __( 'Parent Service Type:' ),
+    'new_item_name'              => __( 'New Service Type Name' ),
+    'add_new_item'               => __( 'Add New Service Type' ),
+    'edit_item'                  => __( 'Edit Service Type' ),
+    'update_item'                => __( 'Update Service Type' ),
+    'view_item'                  => __( 'View Service Type' ),
+    'separate_items_with_commas' => __( 'Separate service types with commas' ),
+    'add_or_remove_items'        => __( 'Add or remove service types' ),
+    'choose_from_most_used'      => __( 'Choose from the most used' ),
+    'popular_items'              => __( 'Popular Service Types' ),
+    'search_items'               => __( 'Search Service Types' ),
+    'not_found'                  => __( 'Not Found' ),
+    'no_terms'                   => __( 'No service types' ),
+    'items_list'                 => __( 'Service Types list' ),
+    'items_list_navigation'      => __( 'Service Types list navigation' ),
+);
+$args = array(
+    'labels'                     => $labels,
+    'hierarchical'               => true,
+    'public'                     => true,
+    'show_ui'                    => true,
+    'show_admin_column'          => true,
+    'show_in_nav_menus'          => true,
+    'show_tagcloud'              => true,
+    'rewrite'                    => array( 'slug' => 'service-type' ), 
+);
+register_taxonomy( 'service_type', array( 'service' ), $args );
+
+
+
+
+
+add_action( 'init', 'fwd_register_taxonomies');
+
+
+
+
 function fwd_rewrite_flush() {
     fwd_register_custom_post_types();
+    fwd_register_taxonomies();
     flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'fwd_rewrite_flush' );
